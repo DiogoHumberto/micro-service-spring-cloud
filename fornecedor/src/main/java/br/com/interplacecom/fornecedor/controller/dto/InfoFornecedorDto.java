@@ -1,7 +1,6 @@
 package br.com.interplacecom.fornecedor.controller.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,17 +13,16 @@ public class InfoFornecedorDto {
 	
 	private Long id;
 	
-	@NotNull
-	@NotEmpty
+	@NotBlank
 	private String nome;
 	
-	@NotNull
-	@NotEmpty
+	@NotBlank
 	private String estado;
 	
-	@NotNull
-	@NotEmpty
+	@NotBlank
 	private String endereco;
 	
+	@NotBlank
+	private String cnpj;
 	
 }
