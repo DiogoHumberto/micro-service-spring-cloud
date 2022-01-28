@@ -31,9 +31,6 @@ public class FornecedorController {
 	@GetMapping("/{estado}")
 	public ResponseEntity<InfoFornecedorDto> getInfoPorEstado(@PathVariable String estado) {
 		InfoFornecedorDto infoFornecedorDto = infoService.getInfoPorEstado(estado);
-//		if (infoFornecedorDto == null) {
-//			throw new FornecedorNotFound("Não encontrado estado: " + estado);
-//		}
 		return ResponseEntity.ok().body(infoFornecedorDto);		
 	}
 	
