@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,12 @@ public class InfoService {
 	@Autowired
 	private InfoRepository infoRepository;
 	
+	@Autowired
+	private Environment environment;
+	
 	public InfoFornecedorDto getInfoPorEstado(String estado) {	
-		LOG.info("Buscando fornecedor de {} ", estado);
-		InfoFornecedor infoFornecedor =  infoRepository.findByEstado(estado);	 
+		LOG.info("Buscando fornecedor estado de {} acessando a porta {}", estado, environment.getProperty("local.server.port"));
+		InfoFornecedor infoFornecedor =  infoRepository.findByEstado(estado.toUpperCase());	
 		return infoFornecedor != null ? InfoFornecedorMapper.toVO(infoFornecedor) : null;
 	}
 	

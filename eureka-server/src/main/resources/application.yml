@@ -1,8 +1,9 @@
-server:
-  port: 8761
-
-spring:  application:    name: naming-server
 eureka:
   client:
-    fetch-registry: false
-    register-with-eureka: false
+    fetch-registry: 'false'
+    register-with-eureka: 'false'
+spring:
+  application:
+    name: naming-server
+server:
+  port: '8761'

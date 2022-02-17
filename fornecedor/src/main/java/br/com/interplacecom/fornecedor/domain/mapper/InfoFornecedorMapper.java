@@ -19,7 +19,7 @@ public class InfoFornecedorMapper {
 				.id(infoFornecedorVO.getId())
 				.cnpj(infoFornecedorVO.getCnpj())
 				.nome(infoFornecedorVO.getNome())
-				.estado(infoFornecedorVO.getEstado())
+				.estado(infoFornecedorVO.getEstado().toUpperCase())
 				.endereco(infoFornecedorVO.getEndereco()).build();
 	}
 
