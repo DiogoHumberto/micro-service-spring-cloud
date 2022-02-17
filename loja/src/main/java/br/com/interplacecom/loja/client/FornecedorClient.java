@@ -10,7 +10,7 @@ import br.com.interplacecom.loja.controller.dto.InfoFornecedorDTO;
 @FeignClient(contextId = "fornecedorContexId", name = "fornecedor", configuration = FornecedorApiConfiguration.class)
 public interface FornecedorClient {
 	
-	@RequestMapping("/info/{estado}")
+	@RequestMapping("fornecedor/info/{estado}")
 	InfoFornecedorDTO getInfoPorEstado(@PathVariable String estado);
 
 }

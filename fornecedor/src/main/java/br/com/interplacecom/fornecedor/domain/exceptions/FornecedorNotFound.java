@@ -13,6 +13,10 @@ public class FornecedorNotFound extends RuntimeException{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public FornecedorNotFound(String message) {
+		super(message);
+	}
+	
 	public FornecedorNotFound(String field, String value) {
 		super(MessageFormat.format("O seller do campo {0} com valor {1} já existe",
                 field, value));
