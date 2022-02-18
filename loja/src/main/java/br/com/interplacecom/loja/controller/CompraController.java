@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.interplacecom.loja.controller.dto.CompraDTO;
 import br.com.interplacecom.loja.controller.dto.TokenDto;
 import br.com.interplacecom.loja.service.CompraService;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 
 @RestController
@@ -27,7 +29,9 @@ public class CompraController {
 	
 	//@Retry(name = "compra-fornecedor")
 	// framework - resilience4j realiza tentativa RETRY- default 3 tentativas - compra-fornecedor 3 -
+	//@Bulkhead(name = "default") // delimita quantas execuções concorrentes vão ter 
 	@CircuitBreaker(name = "default", fallbackMethod = "fallbackMethod")
+	@RateLimiter(name = "max-rate")
 	@PostMapping(path = "/efetuar")
 	public ResponseEntity<String> realizaCompra(@RequestBody CompraDTO compra) {
 		LOG.info("Realizando compra dos itens {}", compra.getItens().toString());

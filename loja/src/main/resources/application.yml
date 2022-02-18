@@ -1,3 +1,19 @@
+resilience4j:
+  retry:
+    instances:
+      compra-fornecedor:
+        max-attempts: '3'
+        wait-duration: 2s
+        enable-exponential-backoff: 'true'
+  ratelimiter:
+    instances:
+      max-rate:
+        limit-refresh-period: 10s
+        limit-for-period: 100
+  bulkhead:
+    instances:
+      default:
+        max-concurrent-calls: '100'
 eureka:
   client:
     service-url:
@@ -10,11 +26,3 @@ spring:
 server:
   servlet:
     context-path: /loja
-resilience4j:
-  retry:
-    instances:
-      compra-fornecedor:
-        max-attempts: '3'
-#        wait-duration: 2s
-#        enable-exponential-backoff: true
-
