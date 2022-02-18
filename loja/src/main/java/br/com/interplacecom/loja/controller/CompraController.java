@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.interplacecom.loja.controller.dto.CompraDTO;
 import br.com.interplacecom.loja.controller.dto.TokenDto;
 import br.com.interplacecom.loja.service.CompraService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 
 @RestController
@@ -24,11 +25,21 @@ public class CompraController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CompraController.class);
 	
-	@Retry(name = "default")// framework - resilience4j - default 3 tentativas 
+	//@Retry(name = "compra-fornecedor")
+	// framework - resilience4j realiza tentativa RETRY- default 3 tentativas - compra-fornecedor 3 -
+	@CircuitBreaker(name = "default", fallbackMethod = "fallbackMethod")
 	@PostMapping(path = "/efetuar")
-	public void realizaCompra(@RequestBody CompraDTO compra) {
+	public ResponseEntity<String> realizaCompra(@RequestBody CompraDTO compra) {
 		LOG.info("Realizando compra dos itens {}", compra.getItens().toString());
-		compraService.realizarCompra(compra);
+		return ResponseEntity.ok(compraService.realizarCompra(compra)? "Efetivada com sucesso!!" : null);
+	}
+	
+	@SuppressWarnings("unused")
+	private ResponseEntity<String> fallbackMethod(Throwable t){
+		//Tratando a exception -- verificando erro
+		//armazenando em Redis (Cache) para processar posterior
+		//Retornando as informações 
+		return ResponseEntity.ok("Serviço indisponivel, armazenamos as informações para reprocessamento em 10 min");
 	}
 	
 	@GetMapping(path = "/token")

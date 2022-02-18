@@ -22,14 +22,14 @@ public class CompraService {
 	@Autowired
 	private GetNetApi getNetApi;	
 	
-	public void realizarCompra(CompraDTO compra) {
+	public boolean realizarCompra(CompraDTO compra) {
 		LOG.info("Iniciando compra {} ", compra.toString());
 		LOG.info("Buscando fornecedor {} ", compra.getEndereco().getEstado());
 		InfoFornecedorDTO fornecedorEstado = fornecedorClient.getInfoPorEstado(compra.getEndereco().getEstado());
 		if (fornecedorEstado == null) {
-			LOG.info("fornecedor {} não encontrado ", compra.getEndereco().getEstado());
 			throw new CompraNotFound("Fornecedor não encontrado :  " +  compra.getEndereco() );
-		}		
+		}
+		return true;
 	}
 	
 	public TokenDto buscaToken() {

@@ -11,3 +11,8 @@ server:
 spring:
   application:
     name: fornecedor
+resilience4j:
+  retry:
+    instances:
+      default:
+        max-attempts: '3'

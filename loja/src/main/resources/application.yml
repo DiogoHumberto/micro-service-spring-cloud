@@ -10,3 +10,11 @@ spring:
 server:
   servlet:
     context-path: /loja
+resilience4j:
+  retry:
+    instances:
+      compra-fornecedor:
+        max-attempts: '3'
+#        wait-duration: 2s
+#        enable-exponential-backoff: true
+
