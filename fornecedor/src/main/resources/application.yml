@@ -11,8 +11,14 @@ server:
 spring:
   application:
     name: fornecedor
+  banner:
+    location: classpath:/templates/banner.txt
 resilience4j:
   retry:
     instances:
       default:
         max-attempts: '3'
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  show-actuator: 'true'

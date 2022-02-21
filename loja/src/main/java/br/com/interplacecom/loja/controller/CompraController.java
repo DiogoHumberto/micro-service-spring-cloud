@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.interplacecom.loja.controller.dto.CompraDTO;
 import br.com.interplacecom.loja.controller.dto.TokenDto;
 import br.com.interplacecom.loja.service.CompraService;
-import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.github.resilience4j.retry.annotation.Retry;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Endpoint sobre a Compra")
 @RestController
 @RequestMapping("/compra")
 public class CompraController {
@@ -32,6 +33,7 @@ public class CompraController {
 	//@Bulkhead(name = "default") // delimita quantas execuções concorrentes vão ter 
 	@CircuitBreaker(name = "default", fallbackMethod = "fallbackMethod")
 	@RateLimiter(name = "max-rate")
+	@Operation(summary = "Realizar uma compra verificando o fornecedor")//documentacao Swagger
 	@PostMapping(path = "/efetuar")
 	public ResponseEntity<String> realizaCompra(@RequestBody CompraDTO compra) {
 		LOG.info("Realizando compra dos itens {}", compra.getItens().toString());

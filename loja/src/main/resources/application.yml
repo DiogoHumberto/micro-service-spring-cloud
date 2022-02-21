@@ -23,6 +23,13 @@ eureka:
 spring:
   application:
     name: loja
+  banner:
+    location: classpath:/templates/banner.txt
 server:
   servlet:
     context-path: /loja
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  show-actuator: 'true'
+

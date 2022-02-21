@@ -9,3 +9,5 @@ spring:
       server:
         native:
           search-locations: c:\microservice-repo
+  banner:
+    location: classpath:/templates/banner.txt

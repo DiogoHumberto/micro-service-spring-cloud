@@ -20,7 +20,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.interplacecom.fornecedor.controller.dto.InfoFornecedorDto;
 import br.com.interplacecom.fornecedor.domain.InfoFornecedor;
 import br.com.interplacecom.fornecedor.service.InfoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Endpoint sobre Fornecedor")
 @RestController
 @RequestMapping("/info")
 public class FornecedorController {
@@ -28,12 +31,14 @@ public class FornecedorController {
 	@Autowired
 	private InfoService infoService;
 	
+	@Operation(summary = "Busca fornecedor por região - Estado")
 	@GetMapping("/{estado}")
 	public ResponseEntity<InfoFornecedorDto> getInfoPorEstado(@PathVariable String estado) {
 		InfoFornecedorDto infoFornecedorDto = infoService.getInfoPorEstado(estado);
 		return ResponseEntity.ok().body(infoFornecedorDto);		
 	}
 	
+	@Operation(summary = "Salva e/ou edita fornecedor")
 	@PostMapping("/fornecedor/create")
 	public ResponseEntity<InfoFornecedorDto> createFornecedor(@RequestBody @Validated InfoFornecedorDto infoFornecedorDto, UriComponentsBuilder uriBuilder) throws Exception {
 		infoService.salvar(infoFornecedorDto);
@@ -46,6 +51,7 @@ public class FornecedorController {
 		
 	}
 	
+	@Operation(summary = "Lista fornecedores")
 	@GetMapping("/fornecedores")
 	public ResponseEntity<Page<InfoFornecedor>> listaFornecedores(@RequestParam Pageable paginacao){
 		return  ResponseEntity

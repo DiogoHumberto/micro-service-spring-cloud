@@ -5,5 +5,7 @@ eureka:
 spring:
   application:
     name: naming-server
+  banner:
+    location: classpath:/templates/banner.txt
 server:
   port: '8761'

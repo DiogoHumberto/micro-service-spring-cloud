@@ -1,0 +1,9 @@
+   _|_|     _|_|_|     _|_|_|  
+ _|    _|   _|    _|     _|    
+ _|_|_|_|   _|_|_|       _|    
+ _|    _|   _|           _|    
+ _|    _|   _|         _|_|_|  
+                               
+                               
+${application.title} ${application.version}
+Gateway API version Spring ${spring-boot.version}

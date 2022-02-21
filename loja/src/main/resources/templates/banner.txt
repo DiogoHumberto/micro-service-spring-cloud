@@ -1,0 +1,8 @@
+______        ________         
+___  / ______ ______(_)______ _
+__  /  _  __ \_____  / _  __ `/
+_  /___/ /_/ /____  /  / /_/ / 
+/_____/\____/ ___  /   \__,_/  
+              /___/            
+${application.title} ${application.version}
+Service Loja Spring ${spring-boot.version}
