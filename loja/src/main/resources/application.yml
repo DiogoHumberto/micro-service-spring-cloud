@@ -1,35 +1,37 @@
+springdoc:
+  show-actuator: 'true'
+  api-docs:
+    path: /v3/api-docs
+eureka:
+  client:
+    register-with-eureka: 'true'
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: 'true'
+spring:
+  application:
+    name: loja
+  sleuth:
+    sampler:
+      probability: '1.0'
+  banner:
+    location: classpath:/templates/banner.txt
 resilience4j:
   retry:
     instances:
       compra-fornecedor:
-        max-attempts: '3'
         wait-duration: 2s
+        max-attempts: '3'
         enable-exponential-backoff: 'true'
   ratelimiter:
     instances:
       max-rate:
+        limit-for-period: '100'
         limit-refresh-period: 10s
-        limit-for-period: 100
   bulkhead:
     instances:
       default:
         max-concurrent-calls: '100'
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-    fetch-registry: 'true'
-    register-with-eureka: 'true'
-spring:
-  application:
-    name: loja
-  banner:
-    location: classpath:/templates/banner.txt
 server:
   servlet:
     context-path: /loja
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-  show-actuator: 'true'
-

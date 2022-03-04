@@ -11,6 +11,16 @@ server:
 spring:
   application:
     name: fornecedor
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/fornecedor
+    password: '123'
+  jpa:
+    generate-ddl: 'true'
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate:
+      ddl-auto: update
   banner:
     location: classpath:/templates/banner.txt
 resilience4j:
