@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-slim
 ARG JAR_FILE=api-gateway/target/*.jar
 COPY ${JAR_FILE} app.jar
 RUN bash -c 'touch /app.jar'
